@@ -1,62 +1,112 @@
-# Fantasy Team Builder Agent - IPL 2025
+# Fantasy Cricket Team Builder
 
-A Chrome Extension that uses LLM + web data to generate optimized IPL fantasy teams based on natural language input.
+An AI-powered fantasy cricket team builder that uses Google's Gemini 2.5 Pro model to analyze match data and create optimal teams.
 
 ## Features
 
-- Natural language team building requests
-- Real-time match & player data extraction
-- Intelligent team composition with role constraints
-- Captain/Vice-captain selection
-- Dream11-style credit system
+- Real-time match data scraping from Cricbuzz
+- AI-powered match analysis using Gemini 2.5 Pro
+- Dynamic team building based on current form and conditions
+- Automatic match URL detection based on team selection
+- Detailed match analysis and strategy explanation
 
-## Project Structure
+## Requirements
 
-```
-assignment24/
-├── extension/           # Chrome Extension files
-│   ├── manifest.json
-│   ├── popup.html
-│   ├── popup.js
-│   └── styles.css
-├── backend/            # Backend API server
-│   ├── app.py
-│   ├── requirements.txt
-│   └── utils/
-│       ├── scraper.py
-│       └── team_builder.py
-└── data/              # Sample data and schemas
-    └── player_data.json
+- Python 3.8+
+- Flask
+- Google Generative AI SDK
+- FirecrawlScraper
+- Environment variables for API keys
+
+## Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd <repository-name>
 ```
 
-## Setup Instructions
+2. Create and activate a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-1. Install backend dependencies:
-   ```bash
-   cd backend
-   pip install -r requirements.txt
-   ```
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-2. Load Chrome Extension:
-   - Open Chrome
-   - Go to chrome://extensions/
-   - Enable Developer Mode
-   - Click "Load unpacked"
-   - Select the `extension` folder
+4. Create a `.env` file in the root directory with:
+```
+GEMINI_API_KEY=your_gemini_api_key_here
+```
 
-## Tech Stack
+## Running the Application
 
-- Frontend: HTML, CSS, JavaScript (Chrome Extension)
-- Backend: Python Flask/FastAPI
-- LLM: GPT-4/Gemini API
-- Data: Web scraping + Static JSON
-- Optional: Telegram Bot integration
+1. Start the backend server:
+```bash
+cd backend
+python app.py
+```
+The server will start on `http://localhost:3000`
 
-## Development Timeline
+2. Load the Chrome extension:
+- Open Chrome and go to `chrome://extensions/`
+- Enable "Developer mode"
+- Click "Load unpacked" and select the `extension` directory
 
-- Day 1: Data format + team rules
-- Day 2: Mock JSON + scraping logic
-- Day 3: LLM prompt & backend agent
-- Day 4: Chrome Extension UI
-- Day 5: Testing + Demo
-# FantasyTeamBuilder
+## API Endpoints
+
+### POST /build-team
+Builds a fantasy team for a match between two teams.
+
+Request body:
+```json
+{
+    "team1": "KKR",
+    "team2": "GT"
+}
+```
+
+Response:
+```json
+{
+    "captain": "Player Name",
+    "players": ["Player 1", "Player 2", ...],
+    "strategy": "Strategy explanation",
+    "match_analysis": "Detailed match analysis",
+    "match_url": "Cricbuzz match URL"
+}
+```
+
+### GET /health
+Health check endpoint to verify server status.
+
+## Error Handling
+
+The API includes comprehensive error handling for:
+- Invalid team names
+- Match URL not found
+- Scraping failures
+- Invalid responses from Gemini
+- JSON parsing errors
+
+## Development
+
+- Backend code is in the `backend/` directory
+- Chrome extension code is in the `extension/` directory
+- Environment variables are managed through `.env` files
+- Logs are available in the console when running the server
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+MIT License - see LICENSE file for details

@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Fantasy Team Builder",
+    "version": "1.0",
+    "description": "Build fantasy cricket teams using AI",
+    "permissions": [
+        "storage"
+    ],
+    "host_permissions": [
+        "http://localhost:3000/*"
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'"
+    }
+}

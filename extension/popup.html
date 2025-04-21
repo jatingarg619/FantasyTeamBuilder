@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fantasy Team Builder</title>
+    <style>
+        body {
+            width: 400px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .team-selection {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            flex: 1;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #loading {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        #error {
+            display: none;
+            color: red;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid red;
+            border-radius: 4px;
+            background-color: #fff2f2;
+        }
+
+        #results {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .captain-section, .players-section, .strategy-section {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        h3, h4 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Fantasy Team Builder</h2>
+        
+        <div class="team-selection">
+            <select id="team1">
+                <option value="">Select Team 1</option>
+                <option value="Chennai Super Kings">Chennai Super Kings</option>
+                <option value="Delhi Capitals">Delhi Capitals</option>
+                <option value="Gujarat Titans">Gujarat Titans</option>
+                <option value="Kolkata Knight Riders">Kolkata Knight Riders</option>
+                <option value="Lucknow Super Giants">Lucknow Super Giants</option>
+                <option value="Mumbai Indians">Mumbai Indians</option>
+                <option value="Punjab Kings">Punjab Kings</option>
+                <option value="Rajasthan Royals">Rajasthan Royals</option>
+                <option value="Royal Challengers Bangalore">Royal Challengers Bangalore</option>
+                <option value="Sunrisers Hyderabad">Sunrisers Hyderabad</option>
+            </select>
+
+            <select id="team2">
+                <option value="">Select Team 2</option>
+                <option value="Chennai Super Kings">Chennai Super Kings</option>
+                <option value="Delhi Capitals">Delhi Capitals</option>
+                <option value="Gujarat Titans">Gujarat Titans</option>
+                <option value="Kolkata Knight Riders">Kolkata Knight Riders</option>
+                <option value="Lucknow Super Giants">Lucknow Super Giants</option>
+                <option value="Mumbai Indians">Mumbai Indians</option>
+                <option value="Punjab Kings">Punjab Kings</option>
+                <option value="Rajasthan Royals">Rajasthan Royals</option>
+                <option value="Royal Challengers Bangalore">Royal Challengers Bangalore</option>
+                <option value="Sunrisers Hyderabad">Sunrisers Hyderabad</option>
+            </select>
+        </div>
+
+        <button id="build-team">Build Team</button>
+
+        <div id="loading">
+            <div class="loading-spinner"></div>
+            <p id="loading-msg">Building your team...</p>
+        </div>
+
+        <div id="error"></div>
+        
+        <div id="results"></div>
+        
+        <div id="team-output"></div>
+        <div id="match-url-output"></div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
